@@ -51,14 +51,20 @@ let quotes = [
 
 const getRandomQuote = () => {
   let randomNumber = Math.floor(Math.random() * quotes.length);
-  return quotes[randomNumber]['quote'];
-}
+  return quotes[randomNumber];
+};
 
 /***
  * `printQuote` function
 ***/
 
-
+const printQuote = () => {
+  let container = document.querySelector('.quote');
+  let source = document.querySelector('.source');
+  let randomQuote = getRandomQuote();
+  container.textContent = `${randomQuote.quote}`;
+  source.textContent = `${randomQuote.source}`;
+};
 
 /***
  * click event listener for the print quote button
