@@ -3,12 +3,8 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
-
 /*** 
- * `quotes` array 
+ * An object array consisting of famous quotes from the movie franchise 'Star Wars'. 
 ***/
 
 let quotes = [
@@ -32,21 +28,17 @@ let quotes = [
   },
   {
     quote: 'Help me, Obi-Wan Kenobi. You\'re my only hope.',
-    source: 'Princess Leia',
-    citation: 'Star Wars: Episode IV - A New Hope',
-    year: 1977
+    source: 'Princess Leia'
   },
   {
     quote: 'It\'s a trap!',
-    source: 'Admiral Ackbar',
-    citation: 'Star Wars: Episode VI - Return of the Jedi',
-    year: 1983
+    source: 'Admiral Ackbar'
   }
 ];
 
 
 /***
- * `getRandomQuote` function
+Function used to produce a random array number from the list of objects inside of it.
 ***/
 
 const getRandomQuote = () => {
@@ -55,15 +47,29 @@ const getRandomQuote = () => {
 };
 
 /***
- * `printQuote` function
+ Function that produces the values from the properties of each object into the HTML page.
 ***/
 
 const printQuote = () => {
-  let container = document.querySelector('.quote');
-  let source = document.querySelector('.source');
+  let quoteBox = document.getElementById('quote-box');
   let randomQuote = getRandomQuote();
-  container.textContent = `${randomQuote.quote}`;
-  source.textContent = `${randomQuote.source}`;
+  let htmlCode = `
+                  <p class="quote"> ${randomQuote.quote} </p>
+                  <p class="source">${randomQuote.source}
+                  `;
+
+  if (randomQuote.citation) {
+    htmlCode += `<span class="citation">${randomQuote.citation}</span>`
+  }
+
+  if (randomQuote.year) {
+    htmlCode += `<span class="year">${randomQuote.year}</span>`
+  }
+
+  htmlCode += `</p>`;
+
+  quoteBox.innerHTML = htmlCode;
+
 };
 
 /***
