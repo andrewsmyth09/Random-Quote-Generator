@@ -12,27 +12,32 @@ let quotes = [
     quote: 'May the Force be with you.',
     source: 'Obi-Wan Kenobi',
     citation: 'Star Wars: Episode IV - A New Hope',
-    year: 1977
+    year: 1977,
+    category: 'Blessing/Goodbye'
   },
   {
     quote: 'I am your father.',
     source: 'Darth Vader',
     citation: 'Star Wars: Episode V - The Empire Strikes Back',
-    year: 1980
+    year: 1980,
+    category: 'Revelation/Dramatic Moment'
   },
   {
     quote: 'Do or do not. There is no try.',
     source: 'Yoda',
     citation: 'Star Wars: Episode V - The Empire Strikes Back',
-    year: 1980
+    year: 1980,
+    category: 'Wisdom/Lesson'
   },
   {
     quote: 'Help me, Obi-Wan Kenobi. You\'re my only hope.',
-    source: 'Princess Leia'
+    source: 'Princess Leia',
+    category: 'Plea for Assistance'
   },
   {
     quote: 'It\'s a trap!',
-    source: 'Admiral Ackbar'
+    source: 'Admiral Ackbar',
+    category: 'Warning/Alert'
   }
 ];
 
@@ -45,6 +50,17 @@ const getRandomQuote = () => {
   let randomNumber = Math.floor(Math.random() * quotes.length);
   return quotes[randomNumber];
 };
+
+/***
+Function that styles the background color of the HTML page when the printQuote function is used.
+***/
+
+const randomColor = () => {
+  let red = Math.floor(Math.random() * 255);
+  let green = Math.floor(Math.random() * 255);
+  let blue = Math.floor(Math.random() * 255);
+  document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+}
 
 /***
  Function that produces the values from the properties of each object into the HTML page.
@@ -66,11 +82,24 @@ const printQuote = () => {
     htmlCode += `<span class="year">${randomQuote.year}</span>`
   }
 
+  if(randomQuote.category) {
+    htmlCode += `<br><span class="category">Category: ${randomQuote.category}</span>`
+  }
+
   htmlCode += `</p>`;
+
+  randomColor();
 
   quoteBox.innerHTML = htmlCode;
 
 };
+
+
+/***
+Automatically change the quote after every 10 seconds.
+***/
+
+setInterval(printQuote, 10000);
 
 /***
  * click event listener for the print quote button
